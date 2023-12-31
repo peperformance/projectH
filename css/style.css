@@ -1,0 +1,477 @@
+@import './hologram.css';
+@import './popup.css';
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    --animations-state: paused;
+    --big-animations-state: paused;
+    overflow: overlay;
+    font-family: 'Orbitron', sans-serif;
+
+}
+
+.toggle-small-animations {
+    --animations-state: running;
+}
+
+.toggle-big-animations {
+    --big-animations-state: running;
+}
+
+.scene {
+    position: relative;
+    height: 100dvh;
+    width: 100dvw;
+    max-width: 100%;
+    overflow: hidden;
+    overflow: clip;
+}
+
+
+.scene img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.background {
+    height: 100vh;
+    width: 100vw;
+    transform-origin: center;
+    transform: translate(-25%, -25%) scale(1.5, 1.5);
+}
+
+.bg-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    animation: bgmove 480s infinite;
+    animation-play-state: var(--big-animations-state);
+
+}
+
+@keyframes bgmove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(10%, 10%);
+    }
+
+    50% {
+        transform: translate(0, 15%);
+    }
+
+    75% {
+        transform: translate(10%, 0);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+
+}
+
+/*hologram*/
+
+
+.scene .hologram img {
+    width: auto;
+}
+
+.platform {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 50%;
+    width: 100%;
+    mix-blend-mode: luminosity;
+    backdrop-filter: blur(30px);
+    clip-path: polygon(36% 39px, 0 100%, 100% 100%, 100% 0);
+}
+
+.lightbox {
+    pointer-events: none;
+}
+
+.lightbox,
+.scene-light,
+.light,
+.linear-light {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+@property --scene-light-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 10deg;
+}
+
+@keyframes scene-light-rotate {
+    0% {
+        --scene-light-angle: 270deg;
+    }
+
+    25% {
+        --scene-light-angle: 200deg;
+    }
+
+    75% {
+        --scene-light-angle: 340deg;
+    }
+
+    100% {
+        --scene-light-angle: 270deg;
+    }
+}
+
+.scene-light {
+    background: linear-gradient(var(--scene-light-angle), rgba(13, 0, 29, 1) 0%, rgba(43, 0, 80, 1) 13%, rgba(75, 1, 135, 1) 35%, rgba(121, 2, 180, 1) 64%, rgba(227, 33, 252, 1) 100%);
+    filter: blur(10px);
+    mix-blend-mode: soft-light;
+    animation: scene-light-rotate infinite 10s ease-in-out;
+    animation-play-state: var(--big-animations-state);
+
+}
+
+
+
+.linear-light {
+    background: linear-gradient(70deg, #ff0099 var(--linear-light-position), #dd00aa calc(2.2* var(--linear-light-position)), #330022);
+    mix-blend-mode: soft-light;
+    animation: linear-light-move infinite 25s linear;
+    animation-play-state: var(--big-animations-state);
+}
+
+@property --linear-light-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 30%;
+}
+
+@keyframes linear-light-move {
+    0% {
+        --linear-light-position: 30%;
+        filter: blur(10px);
+    }
+
+    25% {
+        --linear-light-position: 45%;
+        filter: blur(20px);
+    }
+
+    75% {
+        --linear-light-position: 15%;
+        filter: blur(50px);
+    }
+
+    100% {
+        --linear-light-position: 30%;
+        filter: blur(10px);
+    }
+}
+
+
+.character {
+    position: absolute;
+    right: 10%;
+    bottom: 5%;
+    max-width: 300px;
+    min-width: 100px;
+    width: 15%;
+    cursor: grab;
+}
+
+.character:hover {
+    opacity: 0.5;
+}
+
+.scene .hologram .hat {
+    position: absolute;
+    top: 10px;
+    left: calc(20vh - 30px);
+    width: auto;
+    min-width: 100px;
+    max-width: 300px;
+    height: 15vh;
+    object-fit: contain;
+    display: none;
+}
+
+.hologram .pavuchach {
+    transform: scaleX(-1) rotate(-10deg);
+}
+
+.hologram-wrapper.hologram--pavuchach .pavuchach {
+    display: block;
+    cursor: pointer;
+}
+
+.hologram-wrapper.hologram--ny .ny {
+    height: 30vh;
+    left: calc(10vh - 30px);
+    top: -5vh;
+    display: block;
+    cursor: pointer;
+    max-width: 500px;
+}
+
+
+.hide {
+    visibility: hidden;
+    pointer-events: none;
+    cursor: default;
+}
+
+.ny-hat {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    opacity: 0.8;
+    cursor: grab;
+}
+
+.ny-hat:hover {
+    opacity: 0.5;
+}
+
+
+@keyframes flicker {
+
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px var(--neon-color),
+            0 0 80px var(--neon-color),
+            0 0 90px var(--neon-color),
+            0 0 100px #0fa,
+            0 0 150px #0fa;
+    }
+
+    20%,
+    24%,
+    55% {
+        text-shadow: none;
+    }
+}
+
+.textbox {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 4rem;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.textbox.animation-toggle {
+    left: 2%;
+    top: 10%;
+    right: auto;
+    font-size: 3rem;
+    rotate: -25deg;
+}
+
+.textbox.animation-toggle .text {
+    text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px #ff0,
+            0 0 80px #ff0,
+            0 0 90px #0ff,
+            0 0 100px #ffa,
+            0 0 150px #0ff;
+    animation: neon-color-change infinite 10s ease-in-out;
+    animation-play-state: var(--big-animations-state);
+}
+
+
+.text {
+    margin: 0;
+    text-shadow: 2px 2px 5px #dd00aa;
+    animation: flicker 2s infinite alternate;
+    animation-play-state: var(--animations-state);
+}
+
+.toggle-big-animations .text {
+    animation: flicker 2s infinite alternate, neon-color-change infinite 30s ease-in-out;
+
+}
+
+.triangle-wrapper {
+    font-size: 4px;
+    animation: triangle-rotate 5s infinite cubic-bezier(0, 2.1, 0.85, -1.1);
+    transform: rotate(90deg);
+    padding: 20px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 15px;
+    animation-play-state: var(--big-animations-state);
+}
+
+.triangle-wrapper:hover {
+    opacity: 0.7;
+    animation-iteration-count: 2;
+    animation-play-state: var(--animations-state);
+}
+
+@keyframes triangle-rotate {
+    0% {
+        transform: rotate(90deg);
+
+    }
+
+    10% {
+        transform: rotate(110deg);
+
+    }
+
+    30% {
+        transform: rotate(95deg);
+
+    }
+
+    30% {
+        transform: rotate(105deg);
+
+    }
+
+    40% {
+        transform: rotate(90deg);
+    }
+
+    100% {}
+}
+
+@property --neon-color {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #dd00aa;
+}
+
+@keyframes neon-color-change {
+    0% {
+        --neon-color: #dd00aa;
+    }
+
+    25% {
+        --neon-color: #6600ff;
+    }
+
+    50% {
+        --neon-color: #dd00aa;
+    }
+
+    75% {
+        --neon-color: #ff0044;
+    }
+
+    100% {
+        --neon-color: #dd00aa;
+    }
+}
+
+.triangle {
+    position: relative;
+    text-align: left;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+    animation: neon-color-change infinite 30s ease-in-out;
+    animation-play-state: var(--big-animations-state);
+}
+
+.triangle:before,
+.triangle:after {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    background-color: inherit;
+    border: inherit;
+    animation: inherit;
+    animation-play-state: inherit;
+}
+
+.triangle,
+.triangle:before,
+.triangle:after {
+    width: 10em;
+    height: 10em;
+    border-top-right-radius: 30%;
+}
+
+.triangle {
+    transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+    box-shadow: 5px -5px 10px 1px var(--neon-color);
+    border-bottom: none;
+    border-left: none;
+}
+
+.triangle:before {
+    box-shadow: 2px -2px 10px 1px var(--neon-color);
+    transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(8%, -40%);
+    border-bottom: none;
+    border-left: none;
+}
+
+.triangle:after {
+    transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(40%, 0%);
+    box-shadow: 2px -2px 10px 1px var(--neon-color);
+    border-bottom: none;
+    border-left: none;
+
+}
+
+#music.active .triangle-wrapper {
+    rotate: -90deg;
+}
+#music.active .triangle {
+    background: none;
+    border: none;
+    transform: none;
+    box-shadow: none;
+}
+#music.active .triangle:before,
+#music.active .triangle:after {
+    transform: none;
+    border: none;
+    background-color: #fff;
+    height: 40px;
+    width: 10px;
+    border-radius: 2px;
+    /* rotate: 90deg; */
+}
+#music.active .triangle:after {
+    left: 0;
+}
+#music.active .triangle:before{
+        right: 0;
+
+    }

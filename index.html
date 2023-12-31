@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body class="toggle-small-animations">
+    <main>
+        <div class="scene">
+            <div class="background">
+                <img class="bg-image" src="img/bg.webp" />
+            </div>
+            <div id="music" class="textbox">
+                <p class="text">Neon Symphony</p>
+                <div class="triangle-wrapper" role="button">
+                    <div class="triangle"></div>
+                </div>
+            </div>
+            <div id="animation" class="textbox animation-toggle">
+                <p class="text">{Pixel} [Pulse]</p>
+            </div>
+            <div class="hologram">
+                <div class="hologram-glitches hologram-glitches--glitch">
+
+                    <div class="hologram-wrapper">
+                        <img draggable="false" class="aki hidden" style="position: static;" src="img/akipngsilent.png"
+                            alt="" />
+                        <img draggable="false" class="innactive aki" src="img/akipngsilent.png" alt="" />
+                        <img draggable="false" class="active aki" src="img/akipngtalk.png" alt="" />
+                        <img class="hat pavuchach" src="img/pavuchach.png" alt="" srcset="">
+                        <img class="hat ny" src="img/hat.png" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
+            <div class="platform"><img src="img/platform2.png" alt="" srcset=""></div>
+            <div class="character" data-type="pavuchach">
+                <img draggable="true" data-type="pavuchach" src="img/pavuchach.png" alt="" srcset="">
+            </div>
+        </div>
+        <img class="ny-hat" src="img/hat.png" data-type="ny" />
+    </main>
+    <div class="lightbox">
+        <div class="light"></div>
+        <div class="scene-light"></div>
+        <div class="linear-light"></div>
+    </div>
+    <div class="popup">
+        <button class="close">Close</button>
+        <select name="animation-mode" id="animation-select">
+            <option value="disable">Disable all animations</option>
+            <option value="default" selected>Default</option>
+            <option value="all">Enable all animations</option>
+        </select>
+    </div>
+</body>
+<script src="script/index.js"></script>
+
+</html>

@@ -1,0 +1,70 @@
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: #fff;
+    backdrop-filter: blur(20px) brightness(0.8);
+    border-radius: 15px;
+    padding: 10px 20px 20px;
+    flex-direction: column;
+    display: none;
+}
+
+.popup.visible {
+    display: flex;
+}
+
+.close {
+    position: relative;
+    margin-left: auto;
+    color: transparent;
+    background: none;
+    border: none;
+    display: block;
+    width: 60px;
+    padding: 25px;
+    ;
+    cursor: pointer;
+}
+
+.close:hover {
+    opacity: 0.5;
+}
+
+.close:after,
+.close::before {
+    position: absolute;
+    content: "";
+    width: 40px;
+    height: 4px;
+    background-color: #fff;
+    display: block;
+}
+
+.close:after {
+    transform: rotate(45deg);
+    top: 50%;
+    left: 50%;
+}
+
+.close::before {
+    transform: rotate(-45deg);
+    top: 50%;
+    left: 50%;
+}
+
+#animation-select {
+    font-size: 2.5rem;
+    background: none;
+    color: #fff;
+    text-shadow: 1px 1px 1px #fff, -1px -1px 1px #fff, 1px 1px 2px plum, 3px 3px 5px plum;
+    cursor: pointer;
+}
+
+#animation-select option {
+    background: none;
+    color: #000;
+    font-size: 1.5rem;
+}

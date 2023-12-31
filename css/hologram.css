@@ -1,0 +1,149 @@
+.hologram {
+    position: absolute;
+    left: 5%;
+    bottom: 0;
+    max-width: 35%;
+    max-height: 85vh;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.1s;
+    transform-origin: bottom;
+    pointer-events: none;
+}
+
+.hologram .aki {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.hologram-wrapper {
+    clip-path: polygon(37% 0%, 60% 0%, 74% 14%, 78% 25%, 74% 46%, 58% 49%, 79% 66%, 76% 70%, 97% 88%, 100% 100%, 0 100%, 1% 51%, 0% 31%, 17% 3%, 31% 0%);
+    pointer-events: all;
+    width: fit-content;
+    position: relative;
+    height: 100%;
+    opacity: 0.92;
+}
+
+.hologram .active {
+    visibility: hidden;
+}
+
+.hologram-wrapper:hover {
+    transform: scale(1.01, 1.01);
+    backdrop-filter: blur(1px);
+}
+
+.hologram:hover .active {
+    visibility: visible;
+}
+
+.hologram:hover .inactive {
+    visibility: hidden;
+}
+
+.hologram-glitches {
+    width: 100%;
+    height: 100%;
+
+}
+
+.toggle-big-animations .hologram-glitches:after,
+.toggle-big-animations .hologram-glitches:before {
+    display: block;
+}
+
+.hologram-glitches:after,
+.hologram-glitches:before {
+    content: "";
+    z-index: 3;
+    display: none;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    transition: all 0.2s ease-out;
+    background-color: #ff0099;
+    pointer-events: none;
+}
+
+.hologram-glitches--glitch:before {
+    clip: rect(18vh, 400px, 28vh, 0);
+    margin-left: -1vh;
+    margin-top: .1vh;
+    filter: brightness(150%) contrast(2);
+    mix-blend-mode: color-dodge;
+    opacity: 0.8;
+    animation: shake-glitch--1 1.1s ease-in-out infinite;
+    animation-play-state: var(--big-animations-state);
+}
+
+.hologram-glitches--glitch:after {
+    clip: rect(53vh, 70vh, 63vh, 0vh);
+    margin-left: 1vh;
+    filter: brightness(150%) contrast(2) hue-rotate(20deg);
+    mix-blend-mode: difference;
+    backdrop-filter: brightness(150%) contrast(2);
+    animation: shake-glitch--2 1.4s ease-in-out infinite;
+    animation-play-state: var(--big-animations-state);
+}
+
+
+@keyframes shake-glitch--1 {
+    28% {
+        clip: rect(18vh, 400px, 28vh, 0);
+        margin-left: -1vh;
+    }
+
+    30% {
+        clip: rect(20vh, 400px, 30vh, 0);
+        margin-left: 0.1vh;
+    }
+
+    36% {
+        clip: rect(18vh, 400px, 28vh, 0p);
+        margin-left: -1vh;
+        opacity: 0.8;
+    }
+    37% {
+        opacity: 0;
+    }
+    99% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake-glitch--2 {
+    68% {
+        clip: rect(53vh, 70vh, 63vh, 0vh);
+        margin-left: 1vh;
+    }
+
+    70% {
+        clip: rect(56vh, 70vh, 66vh, 10vh);
+        margin-left: 0.1vh;
+    }
+
+    72% {
+        clip: rect(53vh, 70vh, 63vh, 0vh);
+        margin-left: 1vh;
+    }
+
+    74% {
+        clip: rect(56vh, 70vh, 56vh, 10vh);
+        margin-left: 0.1vh;
+    }
+
+    76% {
+        clip: rect(53vh, 70vh, 63vh, 0vh);
+        margin-left: 1vh;
+    }
+}
