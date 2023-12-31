@@ -47,7 +47,7 @@ hologramHats.forEach((hat) =>
     hologram.classList.remove("hologram--ny");
     character.classList.remove("hide");
     ny.classList.remove("hide");
-    switchNYmusic(false);
+    toggleMusic(state.music, false);
   })
 );
 
